@@ -1,0 +1,43 @@
+Public Class GameElement
+
+    Private PositionX As Integer
+    Private PositionY As Integer
+    Private Width As Integer
+    Private Height As Integer
+    Private ImageFileName As String
+
+    Public Sub New(ByVal x As Integer, ByVal y As Integer, ByVal width As Integer, ByVal height As Integer, ByVal image As String)
+        Me.PositionX = x
+        Me.PositionY = y
+        Me.Width = width
+        Me.Height = height
+        Me.ImageFileName = image
+    End Sub
+
+    Public Function GetDetail() As String
+        Return Me.PositionX & " " & Me.PositionY & " " & Me.Width & " " & Me.Height & " " & Me.ImageFileName
+    End Function
+
+End Class
+
+Public Class Scenery
+
+    Inherits GameElement
+    Private CauseDamage As Boolean
+    Private DamagePoints As Integer
+
+    Public Sub New(ByVal x As Integer, ByVal y As Integer, ByVal width As Integer, ByVal height As Integer, ByVal image As String, ByVal causedamage As Boolean, ByVal damagepoints As Integer)
+        MyBase.New(x, y, width, height, image)
+        Me.CauseDamage = causedamage
+        Me.DamagePoints = damagepoints
+    End Sub
+
+    Public Function GiveDamagePoints() As Integer
+        Dim points As Integer
+        If Me.CauseDamage = True Then
+            points = Me.DamagePoints
+        End If
+        Return points
+    End Function
+
+End Class
