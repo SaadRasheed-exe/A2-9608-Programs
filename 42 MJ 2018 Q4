@@ -1,0 +1,76 @@
+Module Module1
+
+    Sub Main()
+
+        Dim BMXJudge As New Official("Judge", True, "Omar", "Ellaboudy", "Male", "17 / 03 / 1993")
+
+        Console.WriteLine(BMXJudge.Introduction() & " " & BMXJudge.DisplayFullNameAndDateOfBirth() & " " & BMXJudge.DisplayJobTitle())
+        Console.ReadKey()
+
+    End Sub
+
+End Module
+
+Public Class Member
+
+    Private FirstName As String
+    Private LastName As String
+    Private DateOfBirth As Date
+    Private Gender As String
+
+    Public Sub New(ByVal firstname As String, ByVal lastname As String, ByVal birthday As Date, ByVal gender As String)
+
+        Me.FirstName = firstname
+        Me.LastName = lastname
+        Me.DateOfBirth = birthday
+        Me.Gender = gender
+
+    End Sub
+
+    Public Function Introduction() As String
+
+        Return "Hello, I'm " & Me.FirstName & " " & Me.LastName
+
+    End Function
+
+    Public Function DisplayFullNameAndDateOfBirth()
+
+        Return Me.FirstName & " " & Me.LastName & " " & Me.DateOfBirth
+
+    End Function
+
+End Class
+
+Public Class Official
+
+    Inherits Member
+    Private JobTitle As String
+    Private FirstAidTrained As Boolean
+
+    Public Sub New(ByVal jobtitle As String, ByVal firstaidtrained As Boolean, ByVal firstname As String, ByVal lastname As String, ByVal gender As String, ByVal birthday As Date)
+        MyBase.New(firstname, lastname, birthday, gender)
+        Me.JobTitle = jobtitle
+        Me.FirstAidTrained = firstaidtrained
+    End Sub
+
+    Public Function DisplayJobTitle()
+        Return "My job title is " & Me.JobTitle
+    End Function
+
+End Class
+
+Public Class Competitor
+
+    Inherits Member
+    Private Sport As String
+
+    Public Sub New(ByVal sport As String, ByVal firstname As String, ByVal lastname As String, ByVal birthday As Date, ByVal gender As String)
+        MyBase.New(firstname, lastname, birthday, gender)
+        Me.Sport = sport
+    End Sub
+
+    Public Overloads Function Introduction() As String
+        Return MyBase.Introduction & " and my sport is " & Me.Sport
+    End Function
+
+End Class
