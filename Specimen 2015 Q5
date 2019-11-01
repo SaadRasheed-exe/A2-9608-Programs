@@ -1,0 +1,53 @@
+Module Module1
+
+    Sub Main()
+
+        Dim pv1 As New Bus(10, "NBR 123", 51)
+
+        Console.WriteLine(pv1.showMaxStanding)
+
+        Console.WriteLine(pv1.showNumOfSeats)
+
+        Console.WriteLine(pv1.showRegNo)
+
+        Console.ReadKey()
+
+    End Sub
+
+End Module
+
+MustInherit Class PassengerVehicle
+
+    Private regNo As String
+    Private numOfSeats As Integer
+
+    Public Sub New(ByVal r As String, ByVal n As Integer)
+        Me.regNo = r
+        Me.numOfSeats = n
+    End Sub
+
+    Public Function showRegNo() As String
+        Return Me.regNo
+    End Function
+
+    Public Function showNumOfSeats() As String
+        Return Me.numOfSeats
+    End Function
+
+End Class
+
+Class Bus
+
+    Inherits PassengerVehicle
+    Protected maxStanding As Integer
+
+    Public Sub New(ByVal m As Integer, ByVal r As String, ByVal n As Integer)
+        MyBase.New(r, n)
+        Me.maxStanding = m
+    End Sub
+
+    Public Function showMaxStanding() As Integer
+        Return Me.maxStanding
+    End Function
+
+End Class
