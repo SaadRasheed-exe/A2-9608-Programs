@@ -1,0 +1,94 @@
+Public Class QuadraticEquation
+
+    Private QEquation As polynomial
+
+    Public Sub New(ByVal strQE As String)
+
+        QEquation = QEBreaker(strQE)
+
+    End Sub
+
+    Private Function QEBreaker(ByVal strQE As String) As polynomial
+
+        Dim Equation As polynomial
+        Dim Part1 As Part
+        Dim Part2 As Part
+        Dim Count As Integer = 2
+        Dim Count2 As Integer
+
+        Part1.s = Mid(strQE, 1, 1)
+
+        Do Until Mid(strQE, Count, 1) = "^"
+            Count += 1
+        Loop
+        Part1.c = CInt(Mid(strQE, 2, Count - 2))
+
+        Count2 = Count + 1
+
+        Do Until Mid(strQE, Count, 1) = "+" Or Mid(strQE, Count, 1) = "-"
+            Count += 1
+        Loop
+        Part1.p = CInt(Mid(strQE, Count2, Count - Count2))
+
+        Part2.s = Mid(strQE, Count, 1)
+
+        Count += 1
+        Count2 = Count
+
+        Do Until Mid(strQE, Count, 1) = "^"
+            Count += 1
+        Loop
+        Part2.c = CInt(Mid(strQE, Count2, Count - Count2))
+
+        Count += 1
+        Count2 = Count
+
+        Do Until Mid(strQE, Count, 1) = "+" Or Mid(strQE, Count, 1) = "-"
+            Count += 1
+        Loop
+        Part2.p = CInt(Mid(strQE, Count2, Count - Count2))
+
+        Equation.x = Part1
+        Equation.y = Part2
+        Equation.sign = Mid(strQE, Count, 1)
+        Equation.constant = CInt(Mid(strQE, Count + 1, Len(strQE) - Count))
+
+        Return Equation
+
+    End Function
+
+    Public Function getPolynomial() As String
+
+        Dim strQE As String
+
+        strQE = CStr(QEquation.x.s & QEquation.x.c) & "^" & CStr(QEquation.x.p & QEquation.y.s & QEquation.y.c) & "^" & CStr(QEquation.y.p & QEquation.sign & QEquation.constant)
+
+        Return strQE
+
+    End Function
+
+End Class
+
+Module Program
+
+    Structure Part
+        Dim s As Char
+        Dim c As Integer
+        Dim p As Integer
+    End Structure
+
+    Structure polynomial
+        Dim x As Part
+        Dim y As Part
+        Dim sign As Char
+        Dim constant As Integer
+    End Structure
+
+    Sub Main()
+
+        Dim Equation1 As New QuadraticEquation("-54^23+12^15+877")
+
+        Console.ReadKey()
+
+    End Sub
+End Module
