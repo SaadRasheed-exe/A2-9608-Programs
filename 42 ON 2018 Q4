@@ -1,0 +1,62 @@
+Module Program
+    Sub Main()
+        Dim Alex As New Acrobat("Alex", "Tan", "popcorn seller", "Amazing Alex", "acrobat", True)
+    End Sub
+End Module
+
+Public MustInherit Class Performer
+
+    Protected FirstName As String
+    Protected LastName As String
+    Protected SecondaryRole As String
+    Protected StageName As String
+    Protected PerfType As String
+
+    Public Sub New(ByVal f As String, ByVal l As String, ByVal s As String, ByVal st As String, ByVal p As String)
+        Me.FirstName = f
+        Me.LastName = l
+        Me.SecondaryRole = s
+        Me.StageName = st
+        Me.PerfType = p
+    End Sub
+
+    Public Sub EditSecondaryRole(ByVal s As String)
+        Me.SecondaryRole = s
+    End Sub
+
+    Public Sub EditStageName(ByVal st As String)
+        Me.StageName = st
+    End Sub
+
+End Class
+
+Public Class Acrobat
+
+    Inherits Performer
+    Private UseFire As Boolean
+
+    Public Sub New(ByVal f As String, ByVal l As String, ByVal s As String, ByVal st As String, ByVal p As String, ByVal fire As Boolean)
+
+        MyBase.New(f, l, s, st, p)
+        Me.UseFire = fire
+
+    End Sub
+
+    Public Function PerformerInfo() As String
+
+        Dim Message As String
+
+        Message = MyBase.StageName & " (real name " & MyBase.FirstName & " " & MyBase.LastName & ") is an " & LCase(MyBase.PerfType) & ".")
+
+        If Me.UseFire = True Then
+            Message &= " Fire is a part of " & MyBase.StageName & "'s act. "
+        Else
+            Message &= " Fire is not a part of " & MyBase.StageName & "'s act. "
+        End If
+
+        Message &= "When not performing, " & MyBase.StageName & " is a " & LCase(MyBase.SecondaryRole) & "."
+
+        Return Message
+    End Function
+
+End Class
